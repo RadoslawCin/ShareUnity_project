@@ -1,0 +1,48 @@
+{% extends "tematy/base.html" %}
+
+{% block page_header %}
+<div class="jumbotron text-center bg-info text-white">
+    <h1 class="display-4">{{ user.username }}</h1>
+</div>
+{% endblock page_header %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <p>Witaj, {{ user.username }}! Dziękujemy, że korzystasz z naszej platformy.
+                Jesteśmy zaszczyceni, że możemy być częścią Twojej podróży online. Jeśli
+                masz jakiekolwiek pytania lub sugestie, skontaktuj się z nami.</p>
+
+            <h3>Twoje informacje:</h3>
+            <ul class="list-group">
+                <li class="list-group-item"><strong>Email:</strong> {{ user.email }}</li>
+                <li class="list-group-item"><strong>Data rejestracji:</strong> {{ user.date_joined|date:"d M Y H:i" }}</li>
+            </ul>
+
+            <h3 class="mt-4">Twój Blog:</h3>
+            <div class="card-deck">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text">Przejdź do <a href="{% url 'tematy:moj_blog' %}">mojego bloga</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            {% if user.is_authenticated and user == request.user and request.user.blog_owner %}
+            <h3 class="mb-3">Ustawienia użytkownika</h3>
+            <div class="mb-2">
+                <a href="{% url 'tematy:usun_blog' %}" class="btn btn-danger" onclick="return confirm('Czy na pewno chcesz usunąć swój blog?')">Usuń Blog</a>
+            </div>
+            <div class="mb-2">
+                <a href="{% url 'tematy:zmien_haslo' %}" class="btn btn-primary">Zmień Hasło</a>
+            </div>
+            <div>
+                <a href="{% url 'tematy:usun_konto' %}" class="btn btn-danger" onclick="return confirm('Czy na pewno chcesz usunąć swoje konto?')">Usuń Konto</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

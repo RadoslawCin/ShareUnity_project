@@ -1,0 +1,18 @@
+{% extends "tematy/base.html" %}
+
+{% block content %}
+<div class="container d-flex align-items-center justify-content-center">
+    <div class="jumbotron text-center">
+        <h1 class="display-3">Czy na pewno chcesz usunąć ten wpis?</h1>
+
+        <p class="lead">Po potwierdzeniu akcji nie można będzie jej cofnąć</p>
+
+        <form method="post" action="{% url 'tematy:usun_wpis' wpis.id %}">
+            {% csrf_token %}
+            <button type="submit">Tak, usuń wpis</button>
+            <a href="{% url 'tematy:temat' temat_id=wpis.temat.id %}">Anuluj</a>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

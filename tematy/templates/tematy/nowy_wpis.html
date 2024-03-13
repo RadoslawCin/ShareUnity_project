@@ -1,0 +1,10 @@
+{% extends "tematy/base.html" %}
+
+{% block content %}
+<h2>Dodaj nowy wpis</h2>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Dodaj wpis</button>
+</form>
+{% endblock content %}

@@ -1,0 +1,70 @@
+{% extends "tematy/base.html" %}
+
+{% block page_header %}
+<h1>Mój Blog</h1>
+{% endblock page_header %}
+
+{% block content %}
+<ul>
+  {% for Temat in tematy_uzytkownika %}
+  <li>
+    <h3>
+      <a href="{% url 'tematy:temat' Temat.id %}">
+        {{ Temat }}
+      </a>
+    </h3>
+    {% if Temat.wpisy_set.all %}
+    <p>{{ Temat.wpisy_set.last.text|truncatechars:250 }}</p>
+    <p>
+      Autor: {{ Temat.wpisy_set.last.temat.owner.username }} |
+      Ostatnia modyfikacja: {{ Temat.wpisy_set.last.date_added|date:"d M Y H:i"|lower }}
+    </p>
+
+    {% else %}
+    <p>Brak wpisów</p>
+    {% endif %}
+  </li>
+  {% empty %}
+  <li>
+    <h3>Nie dodano jeszcze żadnej historii</h3>
+    {% if not temat.owner == request.user %}
+    <a href="{% url 'tematy:nowy_temat' %}">Dodaj swoją historię</a>
+    {% endif %}
+  </li>
+  <br>
+  <li>
+
+    <h5>Zachęta do Kreatywnego Myślenia:</h5>
+    Zanurz się w świat blogowania i odkryj nieskończone możliwości wyrażania siebie oraz dzielenia się pasją z innymi. Niech Twoja wyobraźnia prowadzi Cię przez fascynujący świat blogosfery, gdzie każdy wpis to kropla kreatywności, inspiracji i wiedzy. Przez blogowanie możesz nie tylko odkrywać siebie na nowo, ale również inspirować innych do działania. Rozwiń swoje skrzydła i daj się ponieść fantazji!
+
+    Opisy dla 10 Blogów:
+
+    Podróże Marzeń: Wprowadź swoich czytelników w magiczny świat podróży, dzieląc się swoimi przygodami z różnych zakątków świata. Odkrywaj nieznane miejsca, dziel się wskazówkami podróżniczymi i inspiruj innych do spełniania swoich marzeń o podróżach.
+
+    Kulinarna Rozkosz: Przenieś czytelników w kulinarną podróż pełną smaków, zapachów i kreatywnych eksperymentów kulinarnych. Dziel się przepisami, recenzjami restauracji, ciekawostkami związanymi z jedzeniem oraz swoimi własnymi doświadczeniami kulinarnymi.
+
+    Sztuka i Kreatywność: Otwórz drzwi do magicznego świata sztuki i kreatywności, dzieląc się swoimi dziełami, inspiracjami oraz technikami twórczymi. Twórz, eksperymentuj i inspirowaj innych swoją pasją do sztuki.
+
+    Zdrowe Życie, Zdrowe Ja: Wprowadź swoich czytelników w świat zdrowego stylu życia, dzieląc się poradami dotyczącymi zdrowego odżywiania, aktywności fizycznej i dbania o równowagę psychiczną. Motywuj innych do prowadzenia zdrowszego i bardziej świadomego życia.
+
+    Moda z Charakterem: Przedstaw swoją własną wizję mody i stylu, inspirując czytelników do wyrażania siebie poprzez ubrania i dodatki. Dziel się trendami, poradami stylizacyjnymi i refleksjami na temat znaczenia mody w codziennym życiu.
+
+    Historia w Obiektywie: Odkrywaj fascynujące historie zza obiektywu aparatu, dzieląc się fotografiami z podróży, wydarzeń historycznych oraz ciekawych miejsc. Przenieś czytelników w czasie i przestrzeni, pokazując im historię w niezwykły sposób.
+
+    Literackie Pejzaże: Podziel się swoją pasją do literatury, recenzując książki, dzieląc się własnymi tekstami literackimi i refleksjami na temat znaczenia literatury w życiu codziennym. Inspirowaj innych do czytania i tworzenia literackich dzieł.
+
+    Ekologiczny Świat: Zanurz się w tematykę ochrony środowiska, dzieląc się informacjami o ekologii, zrównoważonym rozwoju oraz praktycznymi poradami dotyczącymi życia ekologicznego. Motywuj innych do dbania o naszą planetę i budowania lepszego świata dla przyszłych pokoleń.
+
+    Rodzinne Perypetie: Opowiedz swoją rodzinna historię, dzieląc się zabawnymi anegdotami, poradami wychowawczymi oraz refleksjami na temat wartości rodzinnych więzi. Inspirowaj innych do budowania harmonijnych relacji w rodzinie.
+
+    Technologiczne Nowinki: Przedstaw swoją pasję do technologii, dzieląc się recenzjami gadżetów, poradami technologicznymi oraz analizą najnowszych trendów w dziedzinie technologii. Motywuj innych do eksploracji cyfrowego świata i wykorzystywania nowoczesnych rozwiązań w życiu codziennym.
+  </li>
+  {% endfor %}
+</ul>
+<div class="col-md-4">
+  {% if user.is_authenticated and user == request.user and request.user.blog_owner %}
+  <div class="mb-2">
+    <a href="{% url 'tematy:usun_blog' %}" class="btn btn-danger" onclick="return confirm('Czy na pewno chcesz usunąć swój blog?')">Usuń Blog</a>
+  </div>
+  {% endif %}
+{% endblock content %}

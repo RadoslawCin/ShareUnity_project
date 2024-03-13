@@ -1,0 +1,55 @@
+{% extends "tematy/base.html" %}
+
+{% block page_header %}
+<h1>O mnie</h1>
+{% endblock page_header %}
+
+{% block content %}
+{% load static %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+<header>
+    <h4>Twórca</h4>
+</header>
+
+<div class="container">
+    <div class="row equal-height">
+        <div class="col-md-6">
+            <img src="{% static 'images/2.JPG' %}" alt="photo" class="img-fluid">
+        </div>
+        <div class="col-md-6">
+            <div class="jumbotron">
+                <p class="lead">Radosław C. - Student informatyki. Moja ciekawość technologicznego świata utrzymuje
+                    mnie na bieżąco z najnowszymi trendami. Poza zajęciami uniwersyteckimi lub
+                    projektami, często zanurzam się w książkach o sztucznej inteligencji lub
+                    testuję nowe języki programowania. Dzięki mojej determinacji i zaangażowaniu,
+                    mam pewność, że osiągnę wiele sukcesów w świecie informatyki.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section>
+    <h4>O projekcie</h4>
+    <p>Strona, którą obecnie przeglądasz, to rezultat mojego projektu informatycznego,
+        który został stworzony w ramach zaliczenia pewnych zajęć. Celem tego projektu
+        było nie tylko zdobycie wymaganych punktów, ale również rozwijanie praktycznych
+        umiejętności związanych z projektowaniem i tworzeniem stron internetowych.
+        Podczas procesu tworzenia tej strony skoncentrowałem się na implementacji
+        nowoczesnych technologii, dbając o estetykę i funkcjonalność. W trakcie pracy
+        nad projektem zdobyłem cenne doświadczenie w zakresie projektowania interfejsu
+        użytkownika, optymalizacji kodu oraz zarządzania zasobami. Mam nadzieję, że
+        korzystanie z tej strony przyniesie pozytywne doświadczenia i zadowolenie
+        użytkownikom</p>
+</section>
+
+<footer>
+    <p>&copy; 2024 O mnie. All rights reserved.</p>
+</footer>
+
+</body>
+
+{% endblock content %}

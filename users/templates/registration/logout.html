@@ -1,0 +1,16 @@
+{% extends "tematy/base.html" %}
+
+{% block page_header %}
+<div class='jumbotron text-center'>
+    <h1 class="display-3">Zostałeś poprawnie wylogowany z serwisu.</h1>
+
+    <p class="lead">To już koniec na dziś?</p>
+
+    <a class="btn btn-lg btn-info" href="{% url 'users:login' %}" role="button">Wróć do nas &raquo;</a>
+
+</div>
+
+{% endblock page_header%}
+
+
+

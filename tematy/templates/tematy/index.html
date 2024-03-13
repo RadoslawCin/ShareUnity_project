@@ -1,0 +1,60 @@
+{% extends "tematy/base.html" %}
+
+{% block page_header %}
+<div class='row'>
+    <div class='col-lg-8'>
+        <div class='jumbotron text-center'>
+            <h1 class="display-3">Odkrywaj historię i daj się ponieść wyobraźni.</h1>
+
+            <p class="lead">Zawsze marzyłeś o prowadzeniu własnego bloga? Zacznij już dziś a przekonasz się jakie to proste.
+                Twoje marzenie może spełnić się już dzisiaj. Podziel się z innymi użytkownikami swoją
+                wiedzą, pasją, przemyśleniami lub czymkolwiek chcesz. Zapoznaj się z naszym regulaminem i daj się porwać wyobraźni.</p>
+
+            <a class="btn btn-lg btn-info" href="{% url 'users:register' %}" role="button">Zarejestruj konto już dziś &raquo;</a>
+        </div>
+        <div class='jumbotron text-center'>
+            <h1 class="display-3"></h1>
+            <h1 class="display-3">Czym jest projekt ShareUnity</h1>
+
+            <p class="lead">
+                ShareUnity to innowacyjna platforma internetowa, która umożliwia użytkownikom tworzenie i dzielenie się
+                swoimi unikalnymi historiami poprzez personalne blogi. Projekt ShareUnity jest dedykowany wszystkim,
+                którzy pragną wyrazić swoje pomysły, pasje, i doświadczenia w formie cyfrowego dziennika.</p>
+
+        </div>
+    </div>
+
+    <div class='col-lg-4'>
+        <!-- Pasek po prawej stronie z najnowszymi wpisami -->
+        <div class="card">
+            <div class="card-header">
+                Najnowsze wpisy
+            </div>
+            <ul class="list-group list-group-flush">
+                {% for wpis in najnowsze_wpisy %}
+                <li class="list-group-item">
+                    <a href="{% url 'tematy:temat' temat_id=wpis.temat.id %}">{{ wpis.temat.text }}:</a>
+                    {{ wpis.text|truncatechars:100 }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="card mt-3">
+            <div class="card-header">
+                Nowi użytkownicy
+            </div>
+            <ul class="list-group list-group-flush">
+                {% for user in najnowsi_uzytkownicy %}
+                <li class="list-group-item">
+                    {{ user.username }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+
+</div>
+{% endblock page_header %}
+
+

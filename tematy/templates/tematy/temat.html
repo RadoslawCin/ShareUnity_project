@@ -1,0 +1,35 @@
+{% extends "tematy/base.html" %}
+
+{% block page_header %}
+<h2>{{ temat }}</h2>
+{% endblock page_header %}
+
+{% block content %}
+<p>
+    <a href="{% url 'tematy:nowy_wpis' temat.id %}" class="btn btn-primary" {% if not temat.owner == request.user %}data-toggle="tooltip" title="Brak uprawnień do dodawania wpisu"{% endif %}>
+        Dodaj nowy wpis
+    </a>
+</p>
+
+{% for wpis in wpisy %}
+<div class="card mb-3">
+    <div class="card-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <span>{{ wpis.date_added|date:'d M Y H:i' }}</span>
+            {% if wpis.temat.owner == request.user %}
+            <div class="btn-group">
+                <a href="{% url 'tematy:edycja_wpisu' wpis.id %}" class="btn btn-sm btn-outline-secondary">Edytuj</a>
+                <a href="{% url 'tematy:usun_wpis' wpisy_id=wpis.id %}" class="btn btn-sm btn-outline-danger" onclick="return confirm('Czy na pewno chcesz usunąć ten wpis?')">Usuń</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="card-body">
+        {{ wpis.text|linebreaks }}
+    </div>
+</div>
+{% empty %}
+<p class="text-muted">Nie ma jeszcze żadnego wpisu dla tej historii. Zacznij tworzyć nową historię.</p>
+{% endfor %}
+{% endblock content %}

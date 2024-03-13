@@ -1,0 +1,28 @@
+{% extends "tematy/base.html" %}
+
+{% block content %}
+
+    <p> Dodaj nowy temat:</p>
+
+    <form action="{% url 'tematy:nowy_temat' %}" method='post'>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button name="submit">Dodaj temat</button>
+    </form>
+
+<br>
+<br>
+<section>
+<h4>Daj się ponieść wyobraźni</h4>
+<p>Wkrocz do świata blogowania online! To miejsce, gdzie Twoje myśli, pomysły i
+    pasje mogą ożyć w formie cyfrowej. Wpis po wpisie możesz dzielić się swoimi
+    spostrzeżeniami, doświadczeniami i inspiracjami z całym światem. Rozwiń
+    swoje kreatywne skrzydła, podziel się swoją wiedzą i buduj społeczność
+    wokół swojej pasji. Blogowanie to nie tylko sposób na wyrażenie siebie, ale
+    również na naukę, rozwój i inspirację dla innych. Nie czekaj dłużej – zanurz
+    się w magicznym świecie blogosfery i podziel się swoją historią z innymi!</p>
+</section>
+
+<br>
+<br>
+{% endblock content %}

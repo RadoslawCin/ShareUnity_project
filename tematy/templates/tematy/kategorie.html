@@ -1,0 +1,43 @@
+{% extends "tematy/base.html" %}
+
+{% block page_header %}
+<h1>Odkrywaj historię innych użytkowników</h1>
+{% endblock page_header %}
+
+{% block content %}
+<ul>
+    {% for Temat in kategorie %}
+
+    <li>
+        <h3>
+            <a href="{% url 'tematy:temat' Temat.id %}" {% if not Temat.owner == request.user %}data-toggle="tooltip" title="Brak uprawnień do dodawania wpisu"{% endif %}>
+                {{ Temat }}
+                {% if Temat.is_new %}
+                <span class="badge badge-info">Nowy wpis!</span>
+                {% endif %}
+            </a>
+        </h3>
+        {% if Temat.wpisy_set.all %}
+        <p>{{ Temat.wpisy_set.last.text|truncatechars:250 }}</p>
+        <p>
+            Autor: {{ Temat.wpisy_set.last.temat.owner.username }} |
+            Ostatnia modyfikacja: {{ Temat.wpisy_set.last.date_added|date:"d M Y H:i"|lower }}
+        </p>
+        {% else %}
+        <p>Brak wpisów</p>
+
+    </li>
+    {% endif %}
+    {% empty %}
+    <li><h3>Nie dodano jeszcze żadnej historii</h3></li>
+    {% endfor %}
+</ul>
+
+<!-- Aktywacja tooltipu -->
+<script>
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+
+{% endblock content %}
