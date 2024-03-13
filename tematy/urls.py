@@ -41,13 +41,13 @@ urlpatterns = [
     #Edycja wpisu
     path('edycja_wpisu/<int:wpisy_id>', views.edycja_wpisu, name='edycja_wpisu'),
     # Usuń wpis
-    path('usun_wpis/<int:wpisy_id>/', views.delete_entry, name='usun_wpis'),
+    path('usun_wpis/<int:wpisy_id>/', views.usun_wpis, name='usun_wpis'),
     # Usuń blog
-    path('usun_blog/', views.delete_blog, name='usun_blog'),
+    path('usun_blog/', views.usun_blog, name='usun_blog'),
 
     #Użytkownik
     path('moj_blog/', views.moj_blog, name='moj_blog'),
-    path('moja_strona/', views.my_page, name='moja_strona'),
+    path('moja_strona/', views.moja_strona, name='moja_strona'),
     path('zmien_haslo/', views.zmien_haslo, name='zmien_haslo'),
     path('usun_konto/', views.usun_konto, name='usun_konto'),
 

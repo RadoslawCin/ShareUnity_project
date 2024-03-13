@@ -19,7 +19,7 @@ Activate virtual env and install requirements.txt script:
 ```sh
 virtualenv venv -p python3
 source venv/bin/activate  # for Unix/Linux
-venv\Scripts\activate     # for Windows
+venv\Scripts\Activate     # for Windows
 
 pip install -r requirements.txt  # for dependecies
 ```

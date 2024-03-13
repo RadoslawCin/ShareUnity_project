@@ -35,7 +35,7 @@ def terms_of_service(request):
     return render(request, "tematy/terms_of_service.html")
 
 @login_required
-def delete_entry(request, wpisy_id):
+def usun_wpis(request, wpisy_id):
     wpis = Wpisy.objects.get(id=wpisy_id)
 
     if request.method == 'POST':
@@ -53,7 +53,7 @@ def delete_entry(request, wpisy_id):
 
 @login_required
 @user_passes_test(lambda u: hasattr(u, 'blog_owner'), login_url='tematy:kategorie')
-def delete_blog(request):
+def usun_blog(request):
     if request.method == 'POST':
 
         if not hasattr(request.user, 'blog_owner'):
@@ -68,7 +68,7 @@ def delete_blog(request):
     return render(request, 'tematy/usun_blog_confirm.html')
 
 @login_required
-def my_page(request):
+def moja_strona(request):
     return render(request, 'tematy/moja_strona.html')
 
 @login_required
